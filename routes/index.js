@@ -5,9 +5,9 @@ const auth = require('../middlewares/auth');
 
 const NotFoundError = require('../errors/NotFoundError');
 
-router.post('/signin', login);
+router.post('/api/signin', login);
 
-router.post('/signup', createUser);
+router.post('/api/signup', createUser);
 
 router.use('/api/users', auth, require('./users'));
 
