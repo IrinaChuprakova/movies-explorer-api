@@ -1,3 +1,4 @@
+// const mongoose = require('mongoose');
 const Movie = require('../models/movie');
 const BadRequest = require('../errors/BadRequest');
 const NotFoundError = require('../errors/NotFoundError');
@@ -20,9 +21,9 @@ const createMovie = (req, res, next) => {
     year,
     description,
     image,
-    trailer,
-    nameRU,
-    nameEN,
+    trailerLink,
+    nameRu,
+    nameEn,
     thumbnail,
     movieId,
   } = req.body;
@@ -33,9 +34,9 @@ const createMovie = (req, res, next) => {
     year,
     description,
     image,
-    trailer,
-    nameRU,
-    nameEN,
+    trailerLink,
+    nameRu,
+    nameEn,
     thumbnail,
     movieId,
     owner,
@@ -54,7 +55,7 @@ const deleteMovie = (req, res, next) => {
   Movie.findById(req.params.movieId)
     .orFail(() => { throw new NotFoundError('Карточка с указанным id не найдена'); })
     .then((movie) => {
-      if (req.user._id !== movie.owner._id.valueOf()) {
+      if (req.user._id !== movie.owner.toString()) {
         throw new Forbidden('Карточки может удалять только создатель');
       }
       Movie.findByIdAndRemove(req.params.movieId)
