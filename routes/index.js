@@ -2,12 +2,13 @@ const router = require('express').Router();
 
 const { login, createUser } = require('../controllers/users');
 const auth = require('../middlewares/auth');
+const { signupValidator, signinValidator } = require('../middlewares/validation');
 
 const NotFoundError = require('../errors/NotFoundError');
 
-router.post('/api/signin', login);
+router.post('/api/signin', signinValidator, login);
 
-router.post('/api/signup', createUser);
+router.post('/api/signup', signupValidator, createUser);
 
 router.use('/api/users', auth, require('./users'));
 
