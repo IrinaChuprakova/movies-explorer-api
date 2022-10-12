@@ -31,8 +31,8 @@ const createMovieValidator = celebrate({
     description: Joi.string().required(),
     image: Joi.string().regex(/^https?:\/\/(?:www\.)?([\w-]+\.)+\/?\S*$/),
     trailerLink: Joi.string().regex(/^https?:\/\/(?:www\.)?([\w-]+\.)+\/?\S*$/),
-    nameRU: Joi.string().required(),
-    nameEN: Joi.string().required(),
+    nameRu: Joi.string().required(),
+    nameEn: Joi.string().required(),
     thumbnail: Joi.string().regex(/^https?:\/\/(?:www\.)?([\w-]+\.)+\/?\S*$/),
     movieId: Joi.number().integer().required(),
 

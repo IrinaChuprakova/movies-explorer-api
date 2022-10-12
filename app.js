@@ -8,16 +8,19 @@ const { errors } = require('celebrate');
 const cors = require('cors');
 const router = require('./routes/index');
 
-const { PORT = 3000 } = process.env;
+const { requestLogger, errorLogger } = require('./middlewares/logger');
+
+const { PORT = 3000, NODE_ENV, MONGOBD } = process.env;
 const app = express();
-// moviesdb
-mongoose.connect('mongodb://localhost:27017/diplomdb');
+
+// mongoose.connect('mongodb://localhost:27017/moviesdb');
+mongoose.connect(NODE_ENV === 'production' ? MONGOBD : 'mongodb://localhost:27017/moviesdb');
 app.use(cors());
-// app.use(cookieParser());
 app.use(bodyParser.json());
 
+app.use(requestLogger);
 app.use(router);
-
+app.use(errorLogger);
 app.use(errors());
 
 app.listen(PORT);
