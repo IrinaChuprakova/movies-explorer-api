@@ -14,6 +14,6 @@ router.use('/api/users', auth, require('./users'));
 
 router.use('/api/movies', auth, require('./movies'));
 
-router.use('/api/*', auth, () => { throw new NotFoundError('Произошла ошибка'); });
+router.use('/api/*', auth, () => { throw new NotFoundError('Страница с таким адресом не найдена'); });
 
 module.exports = router;

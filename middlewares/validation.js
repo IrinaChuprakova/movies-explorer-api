@@ -1,4 +1,5 @@
 const { celebrate, Joi } = require('celebrate');
+const { isURL } = require('validator');
 
 const signupValidator = celebrate({
   body: Joi.object().keys({
@@ -29,11 +30,26 @@ const createMovieValidator = celebrate({
     duration: Joi.number().integer().required(),
     year: Joi.number().integer().required(),
     description: Joi.string().required(),
-    image: Joi.string().regex(/^https?:\/\/(?:www\.)?([\w-]+\.)+\/?\S*$/),
-    trailerLink: Joi.string().regex(/^https?:\/\/(?:www\.)?([\w-]+\.)+\/?\S*$/),
-    nameRu: Joi.string().required(),
-    nameEn: Joi.string().required(),
-    thumbnail: Joi.string().regex(/^https?:\/\/(?:www\.)?([\w-]+\.)+\/?\S*$/),
+    image: Joi.string().required().custom((value, helpers) => {
+      if (isURL(value)) {
+        return value;
+      }
+      return helpers.message('Поле с ссылкой на постер к фильму заполнено некорректно');
+    }),
+    trailerLink: Joi.string().required().custom((value, helpers) => {
+      if (isURL(value)) {
+        return value;
+      }
+      return helpers.message('Поле с ссылкой на трейлер к фильму заполнено некорректно');
+    }),
+    nameRU: Joi.string().required(),
+    nameEN: Joi.string().required(),
+    thumbnail: Joi.string().required().custom((value, helpers) => {
+      if (isURL(value)) {
+        return value;
+      }
+      return helpers.message('Поле с ссылкой на миниатюрное изображение постера к фильму заполнено некорректно');
+    }),
     movieId: Joi.number().integer().required(),
 
   }),
