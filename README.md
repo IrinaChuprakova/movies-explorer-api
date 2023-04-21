@@ -17,9 +17,9 @@ MongoDB
 Mongoose  
 
 ### Установка и запуск проекта:
-Клонировать репозиторий: https://github.com/IrinaChuprakova/movies-explorer-api.git
-Установить зависимости: npm install
-Запустить сервер: npm run start
-Запустить сервер с hot-reload: npm run dev
+Клонировать репозиторий: https://github.com/IrinaChuprakova/movies-explorer-api.git  
+Установить зависимости: npm install  
+Запустить сервер: npm run start  
+Запустить сервер с hot-reload: npm run dev  
 
 
